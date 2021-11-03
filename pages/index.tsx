@@ -10,7 +10,7 @@ export async function getStaticProps() {
   };
 }
 
-const Home = () => {
+const Home = (): JSX.Element => {
   return (
     <div id="home" className="py-10">
       <Head>
