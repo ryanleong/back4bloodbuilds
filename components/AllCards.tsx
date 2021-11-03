@@ -1,14 +1,6 @@
 import { IAllCardsProps } from "../utils/types";
 
-const sampleCards = [
-  { id: 1, name: "Card 1" },
-  { id: 2, name: "Card 2" },
-  { id: 3, name: "Card 3" },
-  { id: 4, name: "Card 4" },
-  { id: 5, name: "Card 5" },
-];
-
-const AllCards = ({ cards = sampleCards }: IAllCardsProps): JSX.Element => {
+const AllCards = ({ cards }: IAllCardsProps): JSX.Element => {
   const renderCards = () => {
     return cards.map(({ id }) => {
       return (
@@ -17,7 +9,7 @@ const AllCards = ({ cards = sampleCards }: IAllCardsProps): JSX.Element => {
     });
   };
 
-  return <div className="flex flex-1 flex-wrap ml-4">{renderCards()}</div>;
+  return <div className="flex flex-1 flex-wrap ml-8">{renderCards()}</div>;
 };
 
 export default AllCards;

@@ -3,6 +3,10 @@ export interface ICard {
   name: string;
 }
 
+export interface IDeckProps {
+  cards?: Array<ICard>;
+}
+
 export interface IAllCardsProps {
   cards?: Array<ICard>;
 }

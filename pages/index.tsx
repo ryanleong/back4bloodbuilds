@@ -1,6 +1,7 @@
 import Head from "next/head";
 import AllCards from "../components/AllCards";
 import Deck from "../components/Deck";
+import { sampleCards } from "../utils/mocks";
 
 export async function getStaticProps() {
   return {
@@ -24,8 +25,8 @@ const Home = (): JSX.Element => {
       </div>
 
       <main className="flex flex-row mx-auto px-4 max-w-screen-2xl">
-        <Deck />
-        <AllCards />
+        <Deck cards={sampleCards} />
+        <AllCards cards={sampleCards} />
       </main>
     </div>
   );
