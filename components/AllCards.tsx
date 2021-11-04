@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
 import CardsContext from "../contexts/CardsContext";
-import { ICardsContext } from "../utils/types";
+import { ICardsMap } from "../utils/types";
 
 const AllCards = (): JSX.Element => {
-  const allCards = useContext<ICardsContext>(CardsContext);
+  const allCards = useContext<ICardsMap>(CardsContext);
 
   const renderCards = () => {
     // TODO pagination

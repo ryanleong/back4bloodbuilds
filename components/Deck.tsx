@@ -7,7 +7,9 @@ const Deck = ({ cards }: IDeckProps): JSX.Element => {
   const [currentCards, setCurrentCards] = useState<Array<ICard>>([]);
 
   useEffect(() => {
-    setCurrentCards(cards);
+    // Convert map into list
+    const orderedDeck = Object.values(cards).sort((a, b) => a.order - b.order);
+    setCurrentCards(orderedDeck);
   }, []);
 
   const onDrop = ({ addedIndex, removedIndex }): void => {

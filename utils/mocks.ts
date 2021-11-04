@@ -34,6 +34,37 @@ export const sampleCards = [
   },
 ];
 
+export const sampleDeck = {
+  "0": {
+    id: 0,
+    category: "Brawn",
+    name: "Vitamins",
+    description: "15 Health",
+    order: 0,
+  },
+  "1": {
+    id: 1,
+    category: "Brawn",
+    name: "Hydration Pack",
+    description: "25 Health, -15% Ammo Capacity",
+    order: 1,
+  },
+  "2": {
+    id: 2,
+    category: "Brawn",
+    name: "Canned Goods",
+    description: "40 Health, -30% Stamina",
+    order: 2,
+  },
+  "3": {
+    id: 3,
+    category: "Brawn",
+    name: "Batter Up",
+    description: "50% Melee Damage, 5 Health",
+    order: 3,
+  },
+};
+
 export const sampleAllCards = {
   "0": { id: 0, category: "Brawn", name: "Vitamins", description: "15 Health" },
   "1": {

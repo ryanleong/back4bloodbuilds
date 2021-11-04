@@ -1,7 +1,7 @@
 import { createContext } from "react";
-import { ICardsContext } from "../utils/types";
+import { ICardsMap } from "../utils/types";
 
-const CardsContext = createContext<ICardsContext>({});
+const CardsContext = createContext<ICardsMap>({});
 
 export const CardsContextProvider = CardsContext.Provider;
 export default CardsContext;

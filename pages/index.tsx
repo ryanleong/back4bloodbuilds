@@ -1,9 +1,12 @@
 import Head from "next/head";
+
+import { CardsContextProvider } from "../contexts/CardsContext";
+import useDeck from "../hooks/useDeck";
+import { IHomeProps } from "../utils/types";
 import AllCards from "../components/AllCards";
 import Deck from "../components/Deck";
-import { CardsContextProvider } from "../contexts/CardsContext";
-import { sampleCards } from "../utils/mocks";
-import { IHomeProps } from "../utils/types";
+
+import { sampleCards, sampleDeck } from "../utils/mocks";
 
 export async function getStaticProps(): Promise<{ props: IHomeProps }> {
   // TODO: make API call
@@ -17,6 +20,11 @@ export async function getStaticProps(): Promise<{ props: IHomeProps }> {
 }
 
 const Home = ({ allCards }: IHomeProps): JSX.Element => {
+  const { deckCards } = useDeck({
+    // TODO: empty or read from query params
+    initialCards: sampleDeck,
+  });
+
   return (
     <div id="home" className="py-10">
       <Head>
@@ -33,8 +41,8 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
         </div>
 
         <main className="flex flex-row mx-auto px-4 max-w-screen-2xl">
-          <Deck cards={sampleCards} />
-          <AllCards cards={sampleCards} />
+          <Deck cards={deckCards} />
+          <AllCards />
         </main>
       </CardsContextProvider>
     </div>

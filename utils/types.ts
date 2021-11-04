@@ -5,19 +5,31 @@ export interface ICard {
   description: string;
 }
 
+export interface IDeckCard extends ICard {
+  order?: number;
+}
+
 export interface IHomeProps {
-  allCards: ICardsContext;
+  allCards: ICardsMap;
 }
 
 export interface IDeckProps {
-  cards: Array<ICard>;
+  cards: IUseDeckState;
 }
 
 export interface IAllCardsProps {
-  cardsInDeck: ICardsContext;
+  deckCards: ICardsMap;
   onCardClick: (id: number) => void;
 }
 
-export interface ICardsContext {
+export interface ICardsMap {
   [id: string]: ICard;
+}
+
+export interface IUseDeckProps {
+  initialCards: IUseDeckState;
+}
+
+export interface IUseDeckState {
+  [id: string]: IDeckCard;
 }
