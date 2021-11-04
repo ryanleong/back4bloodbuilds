@@ -1,9 +1,10 @@
 import { useContext } from "react";
 
 import CardsContext from "../contexts/CardsContext";
-import { ICardsMap } from "../utils/types";
+import { IAllCardsProps, ICardsMap } from "../utils/types";
 
-const AllCards = (): JSX.Element => {
+const AllCards = (props: IAllCardsProps): JSX.Element => {
+  const { deckCards } = props;
   const allCards = useContext<ICardsMap>(CardsContext);
 
   const renderCards = () => {
@@ -11,7 +12,7 @@ const AllCards = (): JSX.Element => {
     const allCardsArr = Object.values(allCards);
 
     return allCardsArr.map(({ id, name }) => {
-      const isActive = id === 3 ? "border-red-400" : "";
+      const isActive = deckCards[id] ? "border-red-400" : "";
 
       return (
         <div

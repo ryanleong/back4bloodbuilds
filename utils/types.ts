@@ -19,7 +19,6 @@ export interface IDeckProps {
 
 export interface IAllCardsProps {
   deckCards: ICardsMap;
-  onCardClick: (id: number) => void;
 }
 
 export interface ICardsMap {

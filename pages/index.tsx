@@ -42,7 +42,7 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
 
         <main className="flex flex-row mx-auto px-4 max-w-screen-2xl">
           <Deck cards={deckCards} />
-          <AllCards />
+          <AllCards deckCards={deckCards} />
         </main>
       </CardsContextProvider>
     </div>
