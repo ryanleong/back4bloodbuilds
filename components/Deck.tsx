@@ -5,6 +5,8 @@ import { ICard, IDeckProps } from "../utils/types";
 const Deck = (props: IDeckProps): JSX.Element => {
   const { deckCards, updateDeckCardsOrder } = props;
 
+  // TODO: Remove cards from deck
+
   const renderCards = () => {
     return deckCards.map(({ id, name }: ICard) => {
       return (

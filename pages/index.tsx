@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { CardsContextProvider } from "../contexts/CardsContext";
-import useDeck from "../hooks/useDeck";
+import useDeck, { CARD_QUERY_PARAM } from "../hooks/useDeck";
 import { IHomeProps } from "../utils/types";
 import AllCards from "../components/AllCards";
 import Deck from "../components/Deck";
@@ -20,6 +20,9 @@ export async function getStaticProps(): Promise<{ props: IHomeProps }> {
 
 const Home = ({ allCards }: IHomeProps): JSX.Element => {
   const router = useRouter();
+  const initialCardsIds = Array.isArray(router.query[CARD_QUERY_PARAM])
+    ? router.query[CARD_QUERY_PARAM]
+    : [];
 
   const {
     deckCards,
@@ -28,8 +31,7 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
     addToDeck,
     removeFromDeck,
   } = useDeck({
-    // TODO: empty or read from query params
-    initialCardsIds: Array.isArray(router.query.deck) ? router.query.deck : [],
+    initialCardsIds: initialCardsIds as Array<string>,
     allCards: allCards,
   });
 

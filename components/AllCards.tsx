@@ -7,6 +7,10 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
   const { deckCards, addToDeck, removeFromDeck } = props;
   const allCards = useContext<ICardsMap>(CardsContext);
 
+  /**
+   * @description Card on click handler
+   * @param {ICard} card Card object clicked
+   */
   const onClick = (card: ICard) => {
     if (!deckCards[card.id]) {
       addToDeck(card);
@@ -15,8 +19,13 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
     }
   };
 
+  /**
+   * @description Render card list
+   * @returns {JSX.Element} Card list
+   */
   const renderCards = () => {
     // TODO pagination
+    // TODO filter
     const allCardsArr = Object.values(allCards);
 
     return allCardsArr.map((card) => {
