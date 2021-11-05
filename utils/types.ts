@@ -28,7 +28,8 @@ export interface ICardsMap {
 }
 
 export interface IUseDeckProps {
-  initialCards: IUseDeckState;
+  initialCardsIds: Array<string>;
+  allCards: ICardsMap;
 }
 
 export interface IUseDeckState {

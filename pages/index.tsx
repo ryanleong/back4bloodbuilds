@@ -1,12 +1,11 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { CardsContextProvider } from "../contexts/CardsContext";
 import useDeck from "../hooks/useDeck";
 import { IHomeProps } from "../utils/types";
 import AllCards from "../components/AllCards";
 import Deck from "../components/Deck";
-
-import { sampleCards, sampleDeck } from "../utils/mocks";
 
 export async function getStaticProps(): Promise<{ props: IHomeProps }> {
   // TODO: make API call
@@ -20,9 +19,12 @@ export async function getStaticProps(): Promise<{ props: IHomeProps }> {
 }
 
 const Home = ({ allCards }: IHomeProps): JSX.Element => {
+  const router = useRouter();
+
   const { deckCards, addToDeck, removeFromDeck } = useDeck({
     // TODO: empty or read from query params
-    initialCards: sampleDeck,
+    initialCardsIds: Array.isArray(router.query.deck) ? router.query.deck : [],
+    allCards: allCards,
   });
 
   return (

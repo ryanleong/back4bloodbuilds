@@ -2,12 +2,20 @@ import { useEffect, useState } from "react";
 
 import { ICard, IUseDeckProps, IUseDeckState } from "../utils/types";
 
-const useDeck = ({ initialCards }: IUseDeckProps) => {
+const useDeck = ({ initialCardsIds, allCards }: IUseDeckProps) => {
   const [deckCards, setDeckCards] = useState<IUseDeckState>({});
 
   useEffect(() => {
-    setDeckCards(initialCards);
-  }, [initialCards]);
+    const deck = initialCardsIds.reduce((acc, id, index) => {
+      const card = allCards[id];
+      return {
+        ...acc,
+        [id]: { ...card, order: index },
+      };
+    }, {});
+
+    setDeckCards(deck);
+  }, [initialCardsIds, allCards]);
 
   const addToDeck = (card: ICard) => {
     setDeckCards((oldDeckCards) => {

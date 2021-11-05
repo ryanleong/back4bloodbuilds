@@ -12,12 +12,24 @@ const Deck = ({ cards }: IDeckProps): JSX.Element => {
     setCurrentCards(orderedDeck);
   }, [cards]);
 
+  const updateOrder = (newCards: Array<ICard>) => {
+    const newCardsMap = newCards.reduce((acc, card, index) => {
+      acc[card.id] = { ...card, order: index };
+      return acc;
+    }, {});
+
+    console.log(newCardsMap);
+  };
+
   const onDrop = ({ addedIndex, removedIndex }): void => {
     // Reorder cards in state
     setCurrentCards((oldCards) => {
       const newCards = [...oldCards];
       const movedCard = newCards.splice(removedIndex, 1);
       newCards.splice(addedIndex, 0, movedCard[0]);
+
+      updateOrder(newCards);
+
       return newCards;
     });
   };
