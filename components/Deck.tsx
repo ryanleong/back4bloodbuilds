@@ -1,41 +1,12 @@
-import { useEffect, useState } from "react";
-import { Container, Draggable } from "react-smooth-dnd";
+import { Container, Draggable, DropResult } from "react-smooth-dnd";
 
 import { ICard, IDeckProps } from "../utils/types";
 
-const Deck = ({ cards }: IDeckProps): JSX.Element => {
-  const [currentCards, setCurrentCards] = useState<Array<ICard>>([]);
-
-  useEffect(() => {
-    // Convert map into list
-    const orderedDeck = Object.values(cards).sort((a, b) => a.order - b.order);
-    setCurrentCards(orderedDeck);
-  }, [cards]);
-
-  const updateOrder = (newCards: Array<ICard>) => {
-    const newCardsMap = newCards.reduce((acc, card, index) => {
-      acc[card.id] = { ...card, order: index };
-      return acc;
-    }, {});
-
-    console.log(newCardsMap);
-  };
-
-  const onDrop = ({ addedIndex, removedIndex }): void => {
-    // Reorder cards in state
-    setCurrentCards((oldCards) => {
-      const newCards = [...oldCards];
-      const movedCard = newCards.splice(removedIndex, 1);
-      newCards.splice(addedIndex, 0, movedCard[0]);
-
-      updateOrder(newCards);
-
-      return newCards;
-    });
-  };
+const Deck = (props: IDeckProps): JSX.Element => {
+  const { deckCards, updateDeckCardsOrder } = props;
 
   const renderCards = () => {
-    return currentCards.map(({ id, name }: ICard) => {
+    return deckCards.map(({ id, name }: ICard) => {
       return (
         <Draggable key={id}>
           <div className="bg-gray-400 h-10 w-full mb-2 rounded-sm">
@@ -48,7 +19,7 @@ const Deck = ({ cards }: IDeckProps): JSX.Element => {
 
   return (
     <div className="w-80">
-      <Container onDrop={onDrop}>{renderCards()}</Container>
+      <Container onDrop={updateDeckCardsOrder}>{renderCards()}</Container>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { DropResult } from "react-smooth-dnd";
+
 export interface ICard {
   id: number;
   name: string;
@@ -5,16 +7,13 @@ export interface ICard {
   description: string;
 }
 
-export interface IDeckCard extends ICard {
-  order?: number;
-}
-
 export interface IHomeProps {
   allCards: ICardsMap;
 }
 
 export interface IDeckProps {
-  cards: IUseDeckState;
+  deckCards: Array<ICard>;
+  updateDeckCardsOrder: (parms: DropResult) => void;
 }
 
 export interface IAllCardsProps {
@@ -30,8 +29,4 @@ export interface ICardsMap {
 export interface IUseDeckProps {
   initialCardsIds: Array<string>;
   allCards: ICardsMap;
-}
-
-export interface IUseDeckState {
-  [id: string]: IDeckCard;
 }

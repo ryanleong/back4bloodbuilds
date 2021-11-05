@@ -21,7 +21,13 @@ export async function getStaticProps(): Promise<{ props: IHomeProps }> {
 const Home = ({ allCards }: IHomeProps): JSX.Element => {
   const router = useRouter();
 
-  const { deckCards, addToDeck, removeFromDeck } = useDeck({
+  const {
+    deckCards,
+    deckCardsMap,
+    updateDeckCardsOrder,
+    addToDeck,
+    removeFromDeck,
+  } = useDeck({
     // TODO: empty or read from query params
     initialCardsIds: Array.isArray(router.query.deck) ? router.query.deck : [],
     allCards: allCards,
@@ -43,9 +49,12 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
         </div>
 
         <main className="flex flex-row mx-auto px-4 max-w-screen-2xl">
-          <Deck cards={deckCards} />
-          <AllCards
+          <Deck
             deckCards={deckCards}
+            updateDeckCardsOrder={updateDeckCardsOrder}
+          />
+          <AllCards
+            deckCards={deckCardsMap}
             addToDeck={addToDeck}
             removeFromDeck={removeFromDeck}
           />
