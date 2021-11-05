@@ -7,19 +7,21 @@ const useDeck = ({ initialCards }: IUseDeckProps) => {
 
   useEffect(() => {
     setDeckCards(initialCards);
-  }, []);
+  }, [initialCards]);
 
   const addToDeck = (card: ICard) => {
     setDeckCards((oldDeckCards) => {
-      oldDeckCards[card.id] = card;
-      return oldDeckCards;
+      const newDeckCards = { ...oldDeckCards };
+      newDeckCards[card.id] = card;
+      return newDeckCards;
     });
   };
 
   const removeFromDeck = (card: ICard) => {
     setDeckCards((oldDeckCards) => {
-      delete oldDeckCards[card.id];
-      return oldDeckCards;
+      const newDeckCards = { ...oldDeckCards };
+      delete newDeckCards[card.id];
+      return newDeckCards;
     });
   };
 

@@ -10,7 +10,7 @@ const Deck = ({ cards }: IDeckProps): JSX.Element => {
     // Convert map into list
     const orderedDeck = Object.values(cards).sort((a, b) => a.order - b.order);
     setCurrentCards(orderedDeck);
-  }, []);
+  }, [cards]);
 
   const onDrop = ({ addedIndex, removedIndex }): void => {
     // Reorder cards in state

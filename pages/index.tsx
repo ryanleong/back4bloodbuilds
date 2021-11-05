@@ -20,7 +20,7 @@ export async function getStaticProps(): Promise<{ props: IHomeProps }> {
 }
 
 const Home = ({ allCards }: IHomeProps): JSX.Element => {
-  const { deckCards } = useDeck({
+  const { deckCards, addToDeck, removeFromDeck } = useDeck({
     // TODO: empty or read from query params
     initialCards: sampleDeck,
   });
@@ -42,7 +42,11 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
 
         <main className="flex flex-row mx-auto px-4 max-w-screen-2xl">
           <Deck cards={deckCards} />
-          <AllCards deckCards={deckCards} />
+          <AllCards
+            deckCards={deckCards}
+            addToDeck={addToDeck}
+            removeFromDeck={removeFromDeck}
+          />
         </main>
       </CardsContextProvider>
     </div>

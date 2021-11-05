@@ -19,6 +19,8 @@ export interface IDeckProps {
 
 export interface IAllCardsProps {
   deckCards: ICardsMap;
+  addToDeck: (card: ICard) => void;
+  removeFromDeck: (card: ICard) => void;
 }
 
 export interface ICardsMap {
