@@ -5,6 +5,7 @@ export interface ICard {
   name: string;
   category: string;
   description: string;
+  filename: string;
 }
 
 export interface IHomeProps {

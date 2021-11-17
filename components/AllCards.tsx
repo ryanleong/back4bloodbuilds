@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Image from "next/image";
 
 import CardsContext from "../contexts/CardsContext";
 import { IAllCardsProps, ICard, ICardsMap } from "../utils/types";
@@ -30,15 +31,20 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
 
     return allCardsArr.map((card) => {
       const { id, name } = card;
-      const isActive = deckCards[id] ? "border-red-400" : "";
+      const isActive = deckCards[id] ? "border-red-400 border-2" : "";
 
       return (
         <button
           key={id}
           onClick={() => onClick(card)}
-          className={`h-80 w-60 mr-4 mb-4 rounded-md bg-gray-400 border-gray-400 border-4 ${isActive}`}
+          className={`h-80 w-60 mr-4 mb-4 rounded-lg border-0 overflow-hidden ${isActive}`}
         >
-          id: {id}, name: {name}
+          <Image
+            src={`/images/cards/${card.filename}`}
+            alt={name}
+            width="240"
+            height="320"
+          />
         </button>
       );
     });
