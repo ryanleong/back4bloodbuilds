@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 
 import { ICard, ICardsMap, IUseDeckProps } from "../utils/types";
+import { removeDuplicatesFromArray } from "../utils";
 
 /**
  * @description Query param key for cards in deck
  */
 const CARD_QUERY_PARAM = "c";
+
+/**
+ * @description Max number of cards in deck
+ */
+const MAX_CARDS_IN_DECK = 15;
 
 const useDeck = ({ initialCardsIds, allCards }: IUseDeckProps) => {
   const [deckCards, setDeckCards] = useState<Array<ICard>>([]);
@@ -19,12 +25,19 @@ const useDeck = ({ initialCardsIds, allCards }: IUseDeckProps) => {
       return;
     }
 
-    const deckMap = initialCardsIds.reduce((acc, id, index) => {
+    const initialCardsIdsNoDuplicates =
+      removeDuplicatesFromArray(initialCardsIds);
+
+    if (initialCardsIdsNoDuplicates.length > MAX_CARDS_IN_DECK) {
+      initialCardsIdsNoDuplicates.length = MAX_CARDS_IN_DECK;
+    }
+
+    const deckMap = initialCardsIdsNoDuplicates.reduce((acc, id, index) => {
       const card = allCards[id];
       return { ...acc, [id]: card };
     }, {});
 
-    const deck = initialCardsIds.map((id, index) => {
+    const deck = initialCardsIdsNoDuplicates.map((id, index) => {
       return { ...allCards[id] };
     });
 
@@ -62,6 +75,13 @@ const useDeck = ({ initialCardsIds, allCards }: IUseDeckProps) => {
    * @param {ICard} card Card object to be added
    */
   const addToDeck = (card: ICard) => {
+    if (
+      updateDeckCardsOrder[card.id] ||
+      deckCards.length >= MAX_CARDS_IN_DECK
+    ) {
+      return;
+    }
+
     setDeckCards((oldDeckCards) => {
       const newDeckCards = [...oldDeckCards, card];
       updatePath(newDeckCards);
@@ -69,13 +89,9 @@ const useDeck = ({ initialCardsIds, allCards }: IUseDeckProps) => {
     });
 
     setDeckCardsMap((oldDeckCards) => {
-      if (!oldDeckCards[card.id]) {
-        const newDeckCards = { ...oldDeckCards };
-        newDeckCards[card.id] = card;
-        return newDeckCards;
-      }
-
-      return oldDeckCards;
+      const newDeckCards = { ...oldDeckCards };
+      newDeckCards[card.id] = card;
+      return newDeckCards;
     });
   };
 
@@ -124,4 +140,4 @@ const useDeck = ({ initialCardsIds, allCards }: IUseDeckProps) => {
   };
 };
 
-export { useDeck as default, CARD_QUERY_PARAM };
+export { useDeck as default, CARD_QUERY_PARAM, MAX_CARDS_IN_DECK };
