@@ -38,3 +38,7 @@ export interface IUsePaginationProps {
 }
 
 export type TUsePaginationItemRange<T, K> = [T, K];
+
+export interface IUseFilterSearchProps {
+  allCards: ICardsMap;
+}
