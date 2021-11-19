@@ -1,15 +1,22 @@
 import { useContext } from "react";
 import Image from "next/image";
 
-import CardsContext from "../contexts/CardsContext";
-import { IAllCardsProps, ICard, ICardsMap } from "../utils/types";
-import usePagination from "../hooks/usePagination";
+import CardsContext from "../../contexts/CardsContext";
+import { IAllCardsProps, ICard, ICardsMap } from "../../utils/types";
+import usePagination from "../../hooks/usePagination";
+import useFilterSearch from "../../hooks/useFilterSearch";
+import FilterSearchBar from "./FilterSearchBar";
 
 const AllCards = (props: IAllCardsProps): JSX.Element => {
   const { deckCards, addToDeck, removeFromDeck } = props;
   const allCards = useContext<ICardsMap>(CardsContext);
+
+  const { filteredCards, searchValue, setSearchValue } = useFilterSearch({
+    allCards,
+  });
+
   const { page, rangeOfItemsOnPage, goToPage } = usePagination({
-    numOfItems: Object.values(allCards).length,
+    numOfItems: Object.values(filteredCards).length,
   });
 
   const [firstItemOnPage, lastItemOnPage] = rangeOfItemsOnPage;
@@ -32,7 +39,7 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
    */
   const renderCards = () => {
     // TODO filter
-    const allCardsArr = Object.values(allCards);
+    const allCardsArr = Object.values(filteredCards);
     const cardsOnPage = allCardsArr.slice(firstItemOnPage, lastItemOnPage + 1);
 
     return cardsOnPage.map((card) => {
@@ -58,6 +65,11 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
 
   return (
     <div className="flex-1 ml-8">
+      <FilterSearchBar
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
+
       <div className="flex flex-wrap">{renderCards()}</div>
 
       <div className="text-center">

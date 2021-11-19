@@ -42,3 +42,8 @@ export type TUsePaginationItemRange<T, K> = [T, K];
 export interface IUseFilterSearchProps {
   allCards: ICardsMap;
 }
+
+export interface IFilterSearchBarProps {
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+}

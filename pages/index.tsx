@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { CardsContextProvider } from "../contexts/CardsContext";
 import useDeck, { CARD_QUERY_PARAM } from "../hooks/useDeck";
 import { IHomeProps } from "../utils/types";
-import AllCards from "../components/AllCards";
+import AllCards from "../components/AllCards/AllCards";
 import Deck from "../components/Deck";
 
 export async function getStaticProps(): Promise<{ props: IHomeProps }> {
