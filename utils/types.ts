@@ -31,3 +31,10 @@ export interface IUseDeckProps {
   initialCardsIds: Array<string>;
   allCards: ICardsMap;
 }
+
+export interface IUsePaginationProps {
+  numOfItems: number;
+  itemsPerPage?: number;
+}
+
+export type TUsePaginationItemRange<T, K> = [T, K];
