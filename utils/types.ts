@@ -23,12 +23,15 @@ export interface IDeckProps {
   deckCards: Array<ICard>;
   updateDeckCardsOrder: (parms: DropResult) => void;
   removeFromDeck: (card: ICard) => void;
+  setIsCardSelectOpenMobile: (isOpen: boolean) => void;
 }
 
 export interface IAllCardsProps {
   deckCards: ICardsMap;
   addToDeck: (card: ICard) => void;
   removeFromDeck: (card: ICard) => void;
+  isCardSelectOpenMobile: boolean;
+  setIsCardSelectOpenMobile: (isOpen: boolean) => void;
 }
 
 export interface ICardsMap {

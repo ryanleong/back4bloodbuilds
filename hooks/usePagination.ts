@@ -3,7 +3,7 @@ import { IUsePaginationProps, TUsePaginationItemRange } from "../utils/types";
 
 const usePagination = ({
   numOfItems,
-  itemsPerPage = 12,
+  itemsPerPage = 10,
 }: IUsePaginationProps) => {
   const lastItemIndex = numOfItems - 1;
   const [page, setPage] = useState<number>(0);

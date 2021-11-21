@@ -11,7 +11,7 @@ const FilterSearchBar = ({
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         placeholder="Search"
-        className="focus-visible:outline-none bg-gray-900 border-b-2 border-white w-72 py-2"
+        className="focus-visible:outline-none bg-gray-700 md:bg-transparent border-b-2 border-white w-72 py-2"
       />
     </div>
   );

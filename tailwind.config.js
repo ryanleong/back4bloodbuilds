@@ -13,5 +13,5 @@ module.exports = {
       outline: ["focus-visible"],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };

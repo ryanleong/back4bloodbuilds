@@ -6,6 +6,7 @@ import useDeck, { CARD_QUERY_PARAM } from "../hooks/useDeck";
 import { IHomeProps } from "../utils/types";
 import AllCards from "../components/AllCards/AllCards";
 import Deck from "../components/Deck";
+import { useState } from "react";
 
 export async function getStaticProps(): Promise<{ props: IHomeProps }> {
   // TODO: make API call
@@ -20,6 +21,8 @@ export async function getStaticProps(): Promise<{ props: IHomeProps }> {
 
 const Home = ({ allCards }: IHomeProps): JSX.Element => {
   const router = useRouter();
+  const [isCardSelectOpenMobile, setIsCardSelectOpenMobile] =
+    useState<boolean>(false);
   const initialCardsIds = Array.isArray(router.query[CARD_QUERY_PARAM])
     ? router.query[CARD_QUERY_PARAM]
     : [];
@@ -44,22 +47,25 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
       </Head>
 
       <CardsContextProvider value={allCards}>
-        <div className="flex flex-row mx-auto px-4 mb-6 max-w-screen-2xl">
+        <div className="flex container mx-auto px-4 mb-6">
           <h1 className="font-Roboto font-light text-5xl">
             Back 4 Blood Builds
           </h1>
         </div>
 
-        <main className="flex flex-row mx-auto px-4 max-w-screen-2xl">
+        <main className="flex container mx-auto px-4">
           <Deck
             deckCards={deckCards}
             updateDeckCardsOrder={updateDeckCardsOrder}
             removeFromDeck={removeFromDeck}
+            setIsCardSelectOpenMobile={setIsCardSelectOpenMobile}
           />
           <AllCards
             deckCards={deckCardsMap}
             addToDeck={addToDeck}
             removeFromDeck={removeFromDeck}
+            isCardSelectOpenMobile={isCardSelectOpenMobile}
+            setIsCardSelectOpenMobile={setIsCardSelectOpenMobile}
           />
         </main>
       </CardsContextProvider>

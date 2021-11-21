@@ -4,7 +4,12 @@ import { Container, Draggable, DropResult } from "react-smooth-dnd";
 import { ECardCategoryColor, ICard, IDeckProps } from "../utils/types";
 
 const Deck = (props: IDeckProps): JSX.Element => {
-  const { deckCards, updateDeckCardsOrder, removeFromDeck } = props;
+  const {
+    deckCards,
+    updateDeckCardsOrder,
+    removeFromDeck,
+    setIsCardSelectOpenMobile,
+  } = props;
 
   /**
    * Work around for react-smooth-dnd blocking scroll on mobile
@@ -56,13 +61,13 @@ const Deck = (props: IDeckProps): JSX.Element => {
   };
 
   return (
-    <div className="w-80">
+    <div className="w-full md:w-60 lg:w-80">
       <Container onDrop={updateDeckCardsOrder}>{renderCards()}</Container>
 
       {deckCards.length < 15 && (
         <button
           className="h-12 w-full mb-2 rounded-md border-2 border-dashed flex items-center justify-center md:hidden"
-          onClick={() => console.log("here")}
+          onClick={() => setIsCardSelectOpenMobile(true)}
         >
           <span className="material-icons">add</span>
         </button>
