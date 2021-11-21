@@ -3,9 +3,7 @@ import { Container, Draggable, DropResult } from "react-smooth-dnd";
 import { ECardCategoryColor, ICard, IDeckProps } from "../utils/types";
 
 const Deck = (props: IDeckProps): JSX.Element => {
-  const { deckCards, updateDeckCardsOrder } = props;
-
-  // TODO: Remove cards from deck
+  const { deckCards, updateDeckCardsOrder, removeFromDeck } = props;
 
   const renderCards = () => {
     const cardsWithEmpty = [...deckCards];
@@ -20,7 +18,8 @@ const Deck = (props: IDeckProps): JSX.Element => {
       });
     }
 
-    return cardsWithEmpty.map(({ id, name, description, category }: ICard) => {
+    return cardsWithEmpty.map((card: ICard) => {
+      const { id, name, description, category } = card;
       if (name === "EMPTY_CARD") {
         return (
           <button
@@ -50,7 +49,7 @@ const Deck = (props: IDeckProps): JSX.Element => {
                     edit
                   </span>
                 </button>
-                <button className="ml-1">
+                <button className="ml-1" onClick={() => removeFromDeck(card)}>
                   <span className="material-icons">close</span>
                 </button>
               </div>

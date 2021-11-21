@@ -22,6 +22,7 @@ export interface IHomeProps {
 export interface IDeckProps {
   deckCards: Array<ICard>;
   updateDeckCardsOrder: (parms: DropResult) => void;
+  removeFromDeck: (card: ICard) => void;
 }
 
 export interface IAllCardsProps {

@@ -54,6 +54,7 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
           <Deck
             deckCards={deckCards}
             updateDeckCardsOrder={updateDeckCardsOrder}
+            removeFromDeck={removeFromDeck}
           />
           <AllCards
             deckCards={deckCardsMap}
