@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Container, Draggable, DropResult } from "react-smooth-dnd";
 
 import { ECardCategoryColor, ICard, IDeckProps } from "../utils/types";
@@ -5,34 +6,24 @@ import { ECardCategoryColor, ICard, IDeckProps } from "../utils/types";
 const Deck = (props: IDeckProps): JSX.Element => {
   const { deckCards, updateDeckCardsOrder, removeFromDeck } = props;
 
+  /**
+   * Work around for react-smooth-dnd blocking scroll on mobile
+   * https://github.com/kutlugsahin/react-smooth-dnd/issues/75
+   */
+  useEffect(() => {
+    const cleanClasses = () => {
+      document.body.className = "";
+    };
+    document.addEventListener("touchend", cleanClasses, false);
+    return () => {
+      document.removeEventListener("touchend", cleanClasses, false);
+    };
+  }, []);
+
   const renderCards = () => {
-    const cardsWithEmpty = [...deckCards];
-
-    if (cardsWithEmpty.length < 15) {
-      cardsWithEmpty.push({
-        id: -9999,
-        name: "EMPTY_CARD",
-        category: "",
-        description: "",
-        filename: "",
-      });
-    }
-
-    return cardsWithEmpty.map((card: ICard) => {
+    return deckCards.map((card: ICard) => {
       const { id, name, description, category } = card;
-      if (name === "EMPTY_CARD") {
-        return (
-          <button
-            className="h-12 w-full mb-2 rounded-md border-2 border-dashed flex items-center justify-center"
-            onClick={() => console.log("here")}
-            key={id}
-          >
-            <span className="material-icons">add</span>
-          </button>
-        );
-      }
-
-      const categoryColor = `border-${ECardCategoryColor[category]}`;
+      const categoryColor = ECardCategoryColor[category];
 
       return (
         <Draggable key={id}>
@@ -44,7 +35,7 @@ const Deck = (props: IDeckProps): JSX.Element => {
               <span className="text-lg">{name}</span>
 
               <div className="ml-auto flex flex-row items-center">
-                <button>
+                <button className="md:hidden">
                   <span className="material-icons" style={{ fontSize: "21px" }}>
                     edit
                   </span>
@@ -67,6 +58,15 @@ const Deck = (props: IDeckProps): JSX.Element => {
   return (
     <div className="w-80">
       <Container onDrop={updateDeckCardsOrder}>{renderCards()}</Container>
+
+      {deckCards.length < 15 && (
+        <button
+          className="h-12 w-full mb-2 rounded-md border-2 border-dashed flex items-center justify-center md:hidden"
+          onClick={() => console.log("here")}
+        >
+          <span className="material-icons">add</span>
+        </button>
+      )}
     </div>
   );
 };

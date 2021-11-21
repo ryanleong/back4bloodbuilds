@@ -9,10 +9,10 @@ export interface ICard {
 }
 
 export enum ECardCategoryColor {
-  Brawn = "green-400",
-  Discipline = "red-600",
-  Fortune = "yellow-300",
-  Reflex = "blue-200",
+  Brawn = "border-green-400",
+  Discipline = "border-red-600",
+  Fortune = "border-yellow-300",
+  Reflex = "border-blue-200",
 }
 
 export interface IHomeProps {
@@ -54,4 +54,14 @@ export interface IUseFilterSearchProps {
 export interface IFilterSearchBarProps {
   searchValue: string;
   setSearchValue: (value: string) => void;
+}
+
+export interface IUseViewportSizeViewport {
+  width?: number;
+  height: number;
+}
+
+export interface IUseViewportSizeProps {
+  minWidth: number;
+  maxWidth?: number;
 }
