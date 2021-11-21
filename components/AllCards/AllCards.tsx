@@ -15,9 +15,11 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
     allCards,
   });
 
-  const { page, rangeOfItemsOnPage, goToPage } = usePagination({
-    numOfItems: Object.values(filteredCards).length,
-  });
+  const { page, totalNumOfPages, rangeOfItemsOnPage, goToPage } = usePagination(
+    {
+      numOfItems: Object.values(filteredCards).length,
+    }
+  );
 
   const [firstItemOnPage, lastItemOnPage] = rangeOfItemsOnPage;
 
@@ -79,7 +81,9 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
         >
           &larr;
         </button>
-        <span className="text-xl">{page + 1}</span>
+        <span className="text-xl">
+          {page + 1} of {totalNumOfPages}
+        </span>
         <button
           className="border-0 mx-4 text-xl"
           onClick={() => goToPage(page + 1)}

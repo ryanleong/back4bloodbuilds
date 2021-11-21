@@ -10,6 +10,7 @@ const usePagination = ({
   const [rangeOfItemsOnPage, setRangeOfItemsOnPage] = useState<
     TUsePaginationItemRange<number, number>
   >([0, itemsPerPage - 1]);
+  const totalNumOfPages = Math.ceil(numOfItems / itemsPerPage);
 
   /**
    * @description Go to page
@@ -17,7 +18,7 @@ const usePagination = ({
    * @returns void
    */
   const goToPage = (page: number) => {
-    if (page < 0 || page > lastItemIndex) return;
+    if (page < 0 || page >= totalNumOfPages) return;
 
     const firstItemInRange = page * itemsPerPage;
     let lastItemInRange = firstItemInRange + itemsPerPage - 1;
@@ -31,6 +32,7 @@ const usePagination = ({
 
   return {
     page,
+    totalNumOfPages,
     rangeOfItemsOnPage,
     goToPage,
   };
