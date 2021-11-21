@@ -8,6 +8,13 @@ export interface ICard {
   filename: string;
 }
 
+export enum ECardCategoryColor {
+  Brawn = "green-400",
+  Discipline = "red-600",
+  Fortune = "yellow-300",
+  Reflex = "blue-200",
+}
+
 export interface IHomeProps {
   allCards: ICardsMap;
 }
