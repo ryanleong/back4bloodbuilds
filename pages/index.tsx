@@ -48,8 +48,8 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
 
       <CardsContextProvider value={allCards}>
         <div className="flex container mx-auto px-4 mb-6">
-          <h1 className="font-Roboto font-light text-5xl">
-            Back 4 Blood Builds
+          <h1 className="font-Teko text-5xl">
+            BACK<span className="text-red-600">4</span>BlOOD Builds
           </h1>
         </div>
 

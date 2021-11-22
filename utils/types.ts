@@ -9,10 +9,10 @@ export interface ICard {
 }
 
 export enum ECardCategoryColor {
-  Brawn = "border-green-400",
-  Discipline = "border-red-600",
-  Fortune = "border-yellow-300",
-  Reflex = "border-blue-200",
+  Brawn = "BRAWN",
+  Discipline = "DISCIPLINE",
+  Fortune = "FORTUNE",
+  Reflex = "REFLEX",
 }
 
 export interface IHomeProps {

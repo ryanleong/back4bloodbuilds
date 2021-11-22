@@ -25,10 +25,36 @@ const Deck = (props: IDeckProps): JSX.Element => {
     };
   }, []);
 
+  /**
+   * @description Get class for border color
+   * @param {ECardCategoryColor} category ECardCategoryColor key / card category
+   * @returns {string} - css class name
+   */
+  const getBorderColorClass = (category: string): string => {
+    switch (ECardCategoryColor[category]) {
+      case "BRAWN":
+        return "border-green-400";
+      case "DISCIPLINE":
+        return "border-red-600";
+      case "FORTUNE":
+        return "border-yellow-300";
+      case "REFLEX":
+        return "border-blue-200";
+
+      default:
+        return "";
+    }
+  };
+
+  /**
+   * @description Render cards
+   * @returns {JSX.Element} - list of cards
+   * TODO: Add order change for mobile
+   */
   const renderCards = () => {
     return deckCards.map((card: ICard) => {
       const { id, name, description, category } = card;
-      const categoryColor = ECardCategoryColor[category];
+      const categoryColor = getBorderColorClass(category);
 
       return (
         <Draggable key={id}>
@@ -40,11 +66,6 @@ const Deck = (props: IDeckProps): JSX.Element => {
               <span className="text-lg">{name}</span>
 
               <div className="ml-auto flex flex-row items-center">
-                <button className="md:hidden">
-                  <span className="material-icons" style={{ fontSize: "21px" }}>
-                    edit
-                  </span>
-                </button>
                 <button className="ml-1" onClick={() => removeFromDeck(card)}>
                   <span className="material-icons">close</span>
                 </button>

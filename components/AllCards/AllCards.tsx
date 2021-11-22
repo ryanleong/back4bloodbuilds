@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import Image from "next/image";
 
 import CardsContext from "../../contexts/CardsContext";
@@ -29,6 +29,14 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
   const [firstItemOnPage, lastItemOnPage] = rangeOfItemsOnPage;
 
   /**
+   * @description sort all cards alphabetically
+   */
+  const sortedAllCardsArr = useMemo((): ICard[] => {
+    const allCardsArr = Object.values(filteredCards);
+    return allCardsArr.sort((a, b) => a.name.localeCompare(b.name));
+  }, [filteredCards]);
+
+  /**
    * @description Card on click handler
    * @param {ICard} card Card object clicked
    */
@@ -45,13 +53,14 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
    * @returns {JSX.Element} Card list
    */
   const renderCards = () => {
-    // TODO filter
-    const allCardsArr = Object.values(filteredCards);
-    const cardsOnPage = allCardsArr.slice(firstItemOnPage, lastItemOnPage + 1);
+    const cardsOnPage = sortedAllCardsArr.slice(
+      firstItemOnPage,
+      lastItemOnPage + 1
+    );
 
     return cardsOnPage.map((card) => {
       const { id, name } = card;
-      const isActive = deckCards[id] ? "border-red-400 border-2" : "";
+      const isActive = deckCards[id] ? "border-red-600 border-2" : "";
 
       const cardDimensions = `aspect-w-12 aspect-h-16`;
 
@@ -63,8 +72,11 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
         >
           <Image
             src={`/images/cards/${card.filename}`}
-            alt={name}
+            alt={`${name} - Back4Blood card`}
             layout="fill"
+            priority
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPsXQEAAcgBN96ScDoAAAAASUVORK5CYII="
           />
         </button>
       );
@@ -114,7 +126,7 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
           <span className="material-icons">navigate_before</span>
         </button>
 
-        <span className="text-xl">
+        <span className="text-lg">
           {page + 1} of {totalNumOfPages}
         </span>
 
