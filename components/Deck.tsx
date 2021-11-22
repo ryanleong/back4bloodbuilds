@@ -102,7 +102,6 @@ const Deck = (props: IDeckProps): JSX.Element => {
         <Draggable key={id}>
           <div
             className={`flex flex-row w-full mb-2 border-l-4 py-2 pl-3 pr-2 bg-gray-800 ${categoryColor}`}
-            onClick={() => console.log("here")}
           >
             {renderMobileReorder(index)}
 

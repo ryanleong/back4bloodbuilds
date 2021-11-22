@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -24,9 +24,13 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
   const router = useRouter();
   const [isCardSelectOpenMobile, setIsCardSelectOpenMobile] =
     useState<boolean>(false);
-  const initialCardsIds = Array.isArray(router.query[CARD_QUERY_PARAM])
-    ? router.query[CARD_QUERY_PARAM]
-    : [];
+
+  const initialCardsIds = useMemo(() => {
+    const queryParam = router.query[CARD_QUERY_PARAM];
+
+    if (!queryParam) return [];
+    return Array.isArray(queryParam) ? queryParam : [queryParam];
+  }, [router.query]);
 
   const {
     deckCards,
