@@ -42,7 +42,10 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
     <div id="home" className="py-10">
       <Head>
         <title>Back 4 Blood Builds</title>
-        <meta name="description" content="Back 4 Blood Builds" />
+        <meta
+          name="description"
+          content="Build and share your Back 4 Blood decks."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
