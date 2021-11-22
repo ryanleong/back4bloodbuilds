@@ -74,7 +74,6 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
             src={`/images/cards/${card.filename}`}
             alt={`${name} - Back4Blood card`}
             layout="fill"
-            priority
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPsXQEAAcgBN96ScDoAAAAASUVORK5CYII="
           />
