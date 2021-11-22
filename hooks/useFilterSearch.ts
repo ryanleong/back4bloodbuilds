@@ -39,20 +39,18 @@ const useFilterSearch = ({ allCards }: IUseFilterSearchProps) => {
       return;
     }
 
-    setFilteredCards((currentFilteredCards) => {
-      const cardsFromSearch = Object.entries(currentFilteredCards).reduce(
-        (acc, [id, card]) => {
-          const isPartOfSearch = checkIfPartOfSearch(card, value);
-          if (isPartOfSearch) {
-            return { ...acc, [id]: card };
-          }
-          return acc;
-        },
-        {}
-      );
+    const cardsFromSearch = Object.entries(filteredCards).reduce(
+      (acc, [id, card]) => {
+        const isPartOfSearch = checkIfPartOfSearch(card, value);
+        if (isPartOfSearch) {
+          return { ...acc, [id]: card };
+        }
+        return acc;
+      },
+      {}
+    );
 
-      return cardsFromSearch;
-    });
+    setFilteredCards(cardsFromSearch);
   };
 
   /**

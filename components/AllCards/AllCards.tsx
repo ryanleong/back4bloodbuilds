@@ -85,8 +85,8 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
   const containerPositions =
     "fixed md:relative top-0 md:top-auto left-0 md:left-auto";
   const containerDimensions = "w-full md:w-auto h-full md:h-auto";
-  const containerSpcaers = "md:ml-6 px-4 md:px-0 py-8 md:py-0";
-  const containerBg = "bg-gray-700 md:bg-transparent";
+  const containerSpcaers = "md:ml-6 px-4 md:px-0 pb-8 md:pb-0 pt-14 md:pt-0";
+  const containerBg = "bg-gray-900 md:bg-transparent";
   const conatinerOverflow = "overflow-scroll md:overflow-auto";
   const containerTransforms = `transform ${
     isCardSelectOpenMobile ? "translate-x-0" : "translate-x-full"
@@ -104,6 +104,8 @@ const AllCards = (props: IAllCardsProps): JSX.Element => {
 
   return (
     <div className={`flex-1 ${containerStyles.join(" ")}`}>
+      <h2 className="mb-4 text-4xl font-Teko uppercase">Select your cards</h2>
+
       <FilterSearchBar
         searchValue={searchValue}
         setSearchValue={setSearchValue}

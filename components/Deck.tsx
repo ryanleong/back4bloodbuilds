@@ -122,8 +122,27 @@ const Deck = (props: IDeckProps): JSX.Element => {
     });
   };
 
+  const renderPlaceholder = (isMobile: boolean = false): JSX.Element => {
+    if (deckCards.length > 0) return;
+
+    const classes = isMobile ? "flex md:hidden" : "hidden md:flex ";
+    return (
+      <div
+        className={`${classes} justify-center items-center h-96 border-2 border-dashed rounded-md p-4`}
+      >
+        <span className="text-center">
+          Select cards to add them to your deck
+        </span>
+      </div>
+    );
+  };
+
   return (
     <div className="w-full md:w-60 lg:w-80">
+      <h2 className="mb-4 text-4xl font-Teko uppercase">Your Deck</h2>
+
+      {deckCards.length < 1 && renderPlaceholder()}
+
       <Container onDrop={updateDeckCardsOrder}>{renderCards()}</Container>
 
       {deckCards.length < 15 && (
@@ -135,13 +154,7 @@ const Deck = (props: IDeckProps): JSX.Element => {
         </button>
       )}
 
-      {deckCards.length < 1 && (
-        <div className="flex justify-center items-center h-96 border-2 border-dashed rounded-md p-4">
-          <span className="text-center">
-            Select cards to add them to your deck
-          </span>
-        </div>
-      )}
+      {deckCards.length < 1 && renderPlaceholder(true)}
     </div>
   );
 };
