@@ -51,7 +51,7 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
           name="description"
           content="Build and share your Back 4 Blood decks."
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon-32x32.png" />
       </Head>
 
       <Header />
