@@ -93,6 +93,14 @@ const Deck = (props: IDeckProps): JSX.Element => {
           <span className="material-icons">add</span>
         </button>
       )}
+
+      {deckCards.length < 1 && (
+        <div className="flex justify-center items-center h-96 border-2 border-dashed rounded-md p-4">
+          <span className="text-center">
+            Select cards to add them to your deck
+          </span>
+        </div>
+      )}
     </div>
   );
 };
