@@ -49,10 +49,17 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
   return (
     <div id="home">
       <Head>
-        <title>Back 4 Blood Deck Builder</title>
+        <title>Back 4 Blood Deck Builder - Build and share your deck.</title>
+        <meta
+          name="description"
+          content="Build your own custom Back 4 Blood decks. Perfect for sharing builds and theory crafting."
+        />
 
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Back 4 Blood deck builder" />
+        <meta
+          property="og:title"
+          content="Back 4 Blood Deck Builder - Build and share your deck."
+        />
         <meta property="og:url" content={process.env.NEXT_PUBLIC_DOMAIN} />
         {/* <meta property="og:image" content="" /> */}
         <meta
