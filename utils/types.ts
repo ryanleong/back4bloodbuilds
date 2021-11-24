@@ -68,3 +68,8 @@ export interface IUseViewportSizeProps {
   minWidth: number;
   maxWidth?: number;
 }
+
+export interface ISectionTextProps {
+  title?: string;
+  paragraphs: Array<string>;
+}
