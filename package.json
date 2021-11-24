@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "node ./utils/generate-robots.mjs"
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.3.0",
