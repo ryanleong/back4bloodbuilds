@@ -6,6 +6,7 @@ import { CardsContextProvider } from "../contexts/CardsContext";
 import useDeck, { CARD_QUERY_PARAM } from "../hooks/useDeck";
 import { IHomeProps } from "../utils/types";
 import Header from "../components/Header";
+import Trackers from "../components/Trackers";
 import AllCards from "../components/AllCards/AllCards";
 import Deck from "../components/Deck";
 import SectionText from "../components/SectionText";
@@ -32,8 +33,6 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
     if (!queryParam) return [];
     return Array.isArray(queryParam) ? queryParam : [queryParam];
   }, [router.query]);
-
-  console.log(router.locale);
 
   const {
     deckCards,
@@ -70,6 +69,8 @@ const Home = ({ allCards }: IHomeProps): JSX.Element => {
         <link rel="icon" href="/favicon-32x32.png" />
         <link rel="canonical" href={process.env.NEXT_PUBLIC_DOMAIN} />
       </Head>
+
+      <Trackers />
 
       <Header />
 
